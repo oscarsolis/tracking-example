@@ -1,0 +1,5 @@
+<ngui-map [options]="mapOptions" (mapReady$)="mapReady($event)" class="map">
+
+    <marker [position]="mapOptions.center" draggable="true" (dragend)="dragendMarker($event, true)" [zIndex]="10" (initialized$)="markerInit($event)" (drag)="dragendMarker($event)"></marker>
+
+</ngui-map>

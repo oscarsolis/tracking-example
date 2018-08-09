@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0px;
+    font-family: 'Roboto';
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.p-15 {
+    padding: 15px;
+}
+
+.text-danger {
+    color: rgb(201, 26, 26);
+}
+
+.p-25 {
+    padding: 25px;
+}
+
+.p-t-20 {
+    padding-top: 20px;
+}
+
+.input-full {
+    width: 100%;
+}
+
+.p-t-25 {
+    padding-top: 25px;
+}
+
+.m-0 {
+    margin: 0px;
+}
+
+.m-b-50 {
+    margin-bottom: 50px;
+}
+
+.m-t-25 {
+    margin-top: 25px;
+}
+
+.p-b-50 {
+    padding-bottom: 50px;
+}
+
+.flex-center {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.height-100-vh {
+    height: 100vh;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: none;
+    &:hover {
+        color: #ffffff;
+    }
+}
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+//@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';

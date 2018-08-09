@@ -1,0 +1,5 @@
+<ngui-map [options]="mapOptions" (mapReady$)="mapReady($event)" class="map">
+
+    <marker [position]="mapOptions.center" (initialized$)="markerInit($event)"></marker>
+
+</ngui-map>

@@ -1,0 +1,22 @@
+:host {
+    .flex {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .box {
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        border: 1px solid gray;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            box-shadow: 0 7px 12px rgba(0, 0, 0, .45);
+            transform: translate3d(0, -3px, 0);
+        }
+    }
+}

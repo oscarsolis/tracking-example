@@ -1,0 +1,10 @@
+{
+  "on": {
+    "connection": "connection",
+    "disconnect": "disconnect",
+    "changePosition": "change:position"
+  },
+  "emit": {
+  	"changePosition": "change:position"
+  }
+}
