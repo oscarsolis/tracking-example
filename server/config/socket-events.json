@@ -2,9 +2,12 @@
   "on": {
     "connection": "connection",
     "disconnect": "disconnect",
-    "changePosition": "change:position"
+    "changePosition": "change:position",
+    "allPoints": "all:points"
   },
   "emit": {
-  	"changePosition": "change:position"
+  	"changePosition": "change:position",
+  	"allPoints": "all:points",
+  	"updatePoints": "update:points"
   }
 }

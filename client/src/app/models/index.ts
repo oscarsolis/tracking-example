@@ -1,1 +1,1 @@
-export { Route } from './route.model';
+export { Point } from './point.model';

@@ -13,10 +13,6 @@ const Point = new Schema({
 			type: [Number],
 			required: [true, lang.validations.required]
 		}
-  },
-  date: {
-  	type: Date,
-  	default: Date.now
   }
 }, {
     versionKey: false,

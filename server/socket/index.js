@@ -19,11 +19,20 @@ module.exports = (server, next) => {
 			let coordinates = data.coordinates;
 			if(data.save){
 				savePoint(coordinates)
-					.then(result => sendPosition(socket, coordinates))
+					.then(result => {
+						sendPosition(socket, coordinates);
+						socket.broadcast.emit(socketEvents.emit.updatePoints, result);
+					})
 					.catch(error => console.log(error))
 			} else {
 				sendPosition(socket, coordinates);
 			}
+		});
+
+		socket.on(socketEvents.on.allPoints, () => {
+			Point.
+				listNotDeleted()
+				.then(points => socket.emit(socketEvents.emit.allPoints, points));
 		})
 
 	});

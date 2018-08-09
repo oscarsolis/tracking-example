@@ -1,0 +1,16 @@
+:host {
+    $height: calc(100vh - 64px);
+    .map {
+        height: $height;
+        width: 100%;
+    }
+    .list-points {
+        position: absolute;
+        top: 64px;
+        right: 0px;
+        max-width: 25%;
+        max-height: $height;
+        min-height: $height;
+        overflow: auto;
+    }
+}

@@ -1,0 +1,21 @@
+<ngui-map [options]="mapOptions" (mapReady$)="mapReady($event)" class="map">
+
+    <marker [position]="mapOptions.center" (initialized$)="markerInit($event)"></marker>
+
+</ngui-map>
+
+<div class="list-points">
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let point of points" (click)="changeMarker(point.location.coordinates)">
+            <p class="mb-1">
+                <strong>Latitud: </strong>{{ point.location.coordinates[1] }}
+            </p>
+            <p class="mb-1">
+                <strong>Longitud: </strong>{{ point.location.coordinates[0] }}
+            </p>
+            <p class="mb-1">
+                <strong>Fecha: </strong>{{ point.createdAt | amLocale:'es' | amDateFormat:'MM/DD/YYYY, h:mm:ss a'}}
+            </p>
+        </div>
+    </div>
+</div>

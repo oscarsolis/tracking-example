@@ -1,7 +1,8 @@
 // core
 import {
+  NgZone,
   Component,
-  OnDestroy,
+  OnDestroy
 } from '@angular/core';
 
 // services
@@ -17,12 +18,15 @@ import { SOCKET_EVENTS } from '../../config/socket-events.config';
 //
 import { Subscription } from 'rxjs/Subscription';
 
+// models
+import { Point } from '../../models';
+
 @Component({
-  selector: 'app-receiver',
-  templateUrl: './receiver.component.html',
-  styleUrls: ['./receiver.component.scss']
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss']
 })
-export class ReceiverComponent implements OnDestroy {
+export class HistoryComponent implements OnDestroy {
 
   //
   mapOptions: google.maps.MapOptions = MAP_OPTIONS;
@@ -36,7 +40,11 @@ export class ReceiverComponent implements OnDestroy {
   //
   subscriptions: Array<Subscription> = [];
 
+  //
+  points: Array<Point> = [];
+
   constructor(
+    private _ngZone: NgZone,
     private _debug: DebugService,
     private _socketService: SocketService
   ) { }
@@ -68,6 +76,15 @@ export class ReceiverComponent implements OnDestroy {
 
   /**
    *
+   * @param coordinates
+   */
+  changeMarker(coordinates: Array<number>): void {
+    this.marker.setPosition(new google.maps.LatLng(coordinates[1], coordinates[0]));
+    this.map.setCenter(this.marker.getPosition());
+  }
+
+  /**
+   *
    */
   startSocketEvents(): void {
     this._socketService.connect();
@@ -80,8 +97,14 @@ export class ReceiverComponent implements OnDestroy {
 
     this.subscriptions.push(
       this._socketService
-        .on(SOCKET_EVENTS.on.changePosition)
-        .subscribe(this.handlerChangePosition)
+        .on(SOCKET_EVENTS.on.updatePoints)
+        .subscribe(this.handlerUpdatePoints)
+    );
+
+    this.subscriptions.push(
+      this._socketService
+        .on(SOCKET_EVENTS.on.allPoints)
+        .subscribe(this.handlerAllPoints)
     );
   }
 
@@ -90,14 +113,25 @@ export class ReceiverComponent implements OnDestroy {
    */
   handlerConnect = (): void => {
     this._debug.success(`TransmitterComponent ${SOCKET_EVENTS.on.connect}`);
+    this._socketService.emit(SOCKET_EVENTS.emit.allPoints);
   }
 
   /**
    *
    */
-  handlerChangePosition = data => {
-    this._debug.success(`TransmitterComponent ${SOCKET_EVENTS.on.changePosition}`, data);
-    this.marker.setPosition(new google.maps.LatLng(data.lat, data.lng));
+  handlerUpdatePoints = data => {
+    this._debug.success(`TransmitterComponent ${SOCKET_EVENTS.on.updatePoints}`, data);
+    let self = this;
+    self._ngZone.run(() => this.points.push(Object.assign(new Point(), data)));
+  }
+
+  /**
+   *
+   */
+  handlerAllPoints = data => {
+    this._debug.success(`TransmitterComponent ${SOCKET_EVENTS.on.allPoints}`, data);
+    let self = this;
+    self._ngZone.run(() => this.points = data.map(val => Object.assign(new Point(), val)));
   }
 
 }

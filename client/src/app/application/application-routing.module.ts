@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: './home/home.module#HomeModule'
+      },
+      {
+        path: 'historial',
+        loadChildren: './history/history.module#HistoryModule'
       }
     ]
   }
